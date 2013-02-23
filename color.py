@@ -1,3 +1,5 @@
+import math
+
 def _check_8int(val):
   if not (0 <= val <= 255):
     raise ValueError('Value must be 0-255', val)
@@ -23,3 +25,12 @@ class RGBColor(tuple):
   @property
   def blue(self):
     return self[2]
+
+  @staticmethod
+  def distance(color1, color2):
+    return math.sqrt(
+      (color1[0] - color2[0]) ** 2 +
+      (color1[1] - color2[1]) ** 2 +
+      (color1[2] - color2[2]) ** 2
+      )
+    
