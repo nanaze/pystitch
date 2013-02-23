@@ -2,6 +2,7 @@ class RGBColor(tuple):
 
   def __new__(cls, red, green, blue): 
     return tuple.__new__(cls, [red, green, blue])                                        
+  
   @property
   def red(self):
     return self[0]
