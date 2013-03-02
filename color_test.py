@@ -34,7 +34,11 @@ class TestColor(unittest.TestCase):
     self.assertEquals(255, color.RGBColor.distance(a, c))
     self.assertAlmostEqual(441.67, 
         color.RGBColor.distance(a, d), places=2)
-    
+
+  def testRGBColorFromHexString(self):
+    self.assertEquals((255, 0, 166), color.RGBColorFromHexString('#ff00a6'))
+    self.assertEquals((255, 0, 166), color.RGBColorFromHexString('ff00a6'))
+    self.assertRaises(lambda: color.RGBColorFromHexString('#ffgghh'))
 
 if __name__ == '__main__':
     unittest.main()
