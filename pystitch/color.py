@@ -36,17 +36,22 @@ class RGBColor(object):
 def _HexToInt(str):
   return int('0x%s' % str, 16)
 
-def RGBColorFromHexString(str):
-  match = re.match(r'^#?([0-9A-Fa-f]{6})$', str)
+def RGBColorFromHexString(hex_str):
+  red, green, blue = RGBTupleFromHexString(hex_str)
+  return RGBColor(red, green, blue)
+
+def RGBTupleFromHexString(hex_str):
+  match = re.match(r'^#?([0-9A-Fa-f]{6})$', hex_str)
   if match:
     color = match.group(1)
     assert len(color) == 6
-    return RGBColor(
+    return (
       _HexToInt(color[0:2]),
       _HexToInt(color[2:4]),
       _HexToInt(color[4:6]))
 
   raise ValueError('Not valid hex color %s' % str)
+
       
     
   

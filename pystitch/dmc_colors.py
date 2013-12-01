@@ -16,9 +16,8 @@ def _CreateDmcColorFromRow(row):
   print row
   number = int(row[0])
   name = row[1]
-  red = int(row[2])
-  green = int(row[3])
-  blue = int(row[4])
+  hex_color = row[5]
+  red, green, blue = color.RGBColorFromHexString(hex_color)
   return DMCColor(number, name, red, green, blue)
 
 class DMCColor(color.RGBColor):
