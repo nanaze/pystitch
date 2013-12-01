@@ -9,7 +9,7 @@ class TestColor(unittest.TestCase):
     self.assertEquals(2, c.green)
     self.assertEquals(3, c.blue)
 
-    self.assertTupleEqual((1,2,3), c)
+    self.assertEqual(color.RGBColor(1,2,3), c)
 
   def testValue(self):
     self.assertRaises(ValueError, lambda: color.RGBColor(-1, 0, 0))
@@ -36,8 +36,10 @@ class TestColor(unittest.TestCase):
         color.RGBColor.distance(a, d), places=2)
 
   def testRGBColorFromHexString(self):
-    self.assertEquals((255, 0, 166), color.RGBColorFromHexString('#ff00a6'))
-    self.assertEquals((255, 0, 166), color.RGBColorFromHexString('ff00a6'))
+    self.assertEquals(color.RGBColor(255, 0, 166),
+                      color.RGBColorFromHexString('#ff00a6'))
+    self.assertEquals(color.RGBColor(255, 0, 166),
+                      color.RGBColorFromHexString('ff00a6'))
     self.assertRaises(lambda: color.RGBColorFromHexString('#ffgghh'))
 
 if __name__ == '__main__':

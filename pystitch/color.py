@@ -6,34 +6,41 @@ def _check_8int(val):
     raise ValueError('Value must be 0-255', val)
 
 
-class RGBColor(tuple):
+class RGBColor(object):
 
-  def __new__(cls, red, green, blue):
-    t = tuple.__new__(cls, [red, green, blue])                                        
-    # Assert valid values
-    for val in t:
-      _check_8int(val)
+  def __init__(self, red, green, blue):
+    _check_8int(red)
+    _check_8int(green)
+    _check_8int(blue)
 
-    return t
+    self._red = red
+    self._green = green
+    self._blue = blue
 
   @property
   def red(self):
-    return self[0]
+    return self._red
 
   @property
   def green(self):
-    return self[1]
+    return self._green
 
   @property
   def blue(self):
-    return self[2]
+    return self._blue
+
+  def __eq__(self, other):
+    return (
+      (self.red == other.red) and
+      (self.green == other.green) and
+      (self.blue == other.blue))
 
   @staticmethod
   def distance(color1, color2):
     return math.sqrt(
-      (color1[0] - color2[0]) ** 2 +
-      (color1[1] - color2[1]) ** 2 +
-      (color1[2] - color2[2]) ** 2
+      (color1.red - color2.red) ** 2 +
+      (color1.green - color2.green) ** 2 +
+      (color1.blue - color2.blue) ** 2
       )
 
 def _HexToInt(str):
