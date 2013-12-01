@@ -2,6 +2,8 @@ import math
 import re
 
 def _check_8int(val):
+  if type(val) is not int:
+    raise ValueError('Value must be an integer', val)
   if not (0 <= val <= 255):
     raise ValueError('Value must be 0-255', val)
 
@@ -13,21 +15,9 @@ class RGBColor(object):
     _check_8int(green)
     _check_8int(blue)
 
-    self._red = red
-    self._green = green
-    self._blue = blue
-
-  @property
-  def red(self):
-    return self._red
-
-  @property
-  def green(self):
-    return self._green
-
-  @property
-  def blue(self):
-    return self._blue
+    self.red = red
+    self.green = green
+    self.blue = blue
 
   def __eq__(self, other):
     return (
