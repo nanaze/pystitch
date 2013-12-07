@@ -16,8 +16,8 @@ def _CreateDmcColorFromRow(row):
   number = int(row[0])
   name = row[1]
   hex_color = row[5]
-  red, green, blue = color.RGBTupleFromHexString(hex_color)
-  return DMCColor(number, name, red, green, blue)
+  rgb_color = color.RGBColorFromHexString(hex_color)
+  return DMCColor(number, name, rgb_color)
 
 # DMC Colors singleton
 _dmc_colors = None
@@ -44,14 +44,14 @@ def GetDMCColors():
   return _dmc_colors
   
 
-class DMCColor(color.RGBColor):
-  def __init__(self, number, name, red, green, blue):
+class DMCColor(object):
+  def __init__(self, number, name, color):
     self.number = number
     self.name = name
-    super(DMCColor, self).__init__(red, green, blue)
+    self.color = color
 
   def __str__(self):
-    return super(DMCColor, self).__str__() + str((self.number, self.name))
+    return super(DMCColor, self).__str__() + str((self.number, self.name, self.color))
   
 # Simple executable functionality for debugging.
 def main():
