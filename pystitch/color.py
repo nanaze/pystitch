@@ -33,6 +33,9 @@ class RGBColor(object):
       (color1.blue - color2.blue) ** 2
       )
 
+  def __str__(self):
+    return super(RGBColor, self).__str__() + str((self.red, self.green, self.blue))
+
 def _HexToInt(str):
   return int('0x%s' % str, 16)
 

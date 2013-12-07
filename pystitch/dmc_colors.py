@@ -50,6 +50,9 @@ class DMCColor(color.RGBColor):
     self.name = name
     super(DMCColor, self).__init__(red, green, blue)
 
+  def __str__(self):
+    return super(DMCColor, self).__str__() + str((self.number, self.name))
+  
 # Simple executable functionality for debugging.
 def main():
   for color in GetDMCColors():
