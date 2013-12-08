@@ -21,6 +21,5 @@ class ImageTest(unittest.TestCase):
     self.assertEquals((0, 0, 0), pixel_arr[0, 0])
     self.assertEquals((202, 0, 0), pixel_arr[9, 9])
     
-    
 if __name__ == '__main__':
     unittest.main()

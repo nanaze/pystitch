@@ -38,9 +38,6 @@ class RGBColor(tuple):
       (color1[2] - color2[2]) ** 2
       )
 
-  def __str__(self):
-    return super(RGBColor, self).__str__() + str((self.red, self.green, self.blue))
-
 def _HexToInt(str):
   return int('0x%s' % str, 16)
 
