@@ -19,6 +19,8 @@ class PixelArray(object):
     return self._pixels[x][y]
 
 def GetPixelArrayFromImage(img):
+  assert img.mode == 'RGBA', 'Image must be mode RGBA'
+  
   width, height = img.size
 
   image_pixels = img.load()
@@ -28,8 +30,15 @@ def GetPixelArrayFromImage(img):
     pixel_column = list()
     for y in xrange(height):
       pixel = image_pixels[x,y]
-      pixel_color = color.RGBColor(pixel[0], pixel[1], pixel[2])
-      pixel_column.append(pixel_color)
+
+      # Only add the pixel if it's not invisible.
+      alpha = pixel[3]
+      if alpha > 128:
+        pixel_value = color.RGBColor(pixel[0], pixel[1], pixel[2])
+      else:
+        pixel_value = None
+      
+      pixel_column.append(pixel_value)
     pixels.append(pixel_column)
 
   size = (width, height)

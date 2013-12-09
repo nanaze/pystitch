@@ -12,7 +12,7 @@ class ImageTest(unittest.TestCase):
   def testImageAsRGB(self):
     image_path = os.path.join(_GetTestDataDir(), 'sample.png')
     img = Image.open(image_path)
-    img = img.convert('RGB')
+    img = img.convert('RGBA')
 
     pixel_arr = image.GetPixelArrayFromImage(img)
 
