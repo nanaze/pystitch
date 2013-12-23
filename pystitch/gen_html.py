@@ -35,15 +35,20 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
   }
   
   table.grid {
-    border-spacing: 1px; 
+    border-collapse:collapse;
     font-size: 6px;
     font-weight: bold;
   }
 
   .grid td {
+    border:solid 1px #888;
+  }
+
+  .grid .square  {
     overflow: hidden;
     width: 6px;
     height: 6px;
+    text-align: center;
   }
   </style>
   """
@@ -63,9 +68,9 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
       
       if color_map:
         text_color = _GetTextColor(color)
-        print '<span style="color: %s">' % _GetCssRgbColor(_GetTextColor(color))
+        print '<div class="square" style="color: %s">' % _GetCssRgbColor(_GetTextColor(color))
         print color_map.get(color)
-        print '</span>'
+        print '</div>'
         
       print '</td>' 
     print '</td>'
