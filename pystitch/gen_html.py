@@ -50,6 +50,12 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
     height: 6px;
     text-align: center;
   }
+
+  .swatch {
+    padding: 12px;
+    display: inline-block;
+  
+  }
   </style>
   """
 
@@ -66,7 +72,7 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
         style += ' background-color: %s' % _GetCssRgbColor(color)
       print '<td style="%s">' % style
       
-      if color_map:
+      if color and color_map:
         text_color = _GetTextColor(color)
         print '<div class="square" style="color: %s">' % _GetCssRgbColor(_GetTextColor(color))
         print color_map.get(color)
@@ -75,6 +81,43 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
       print '</td>' 
     print '</td>'
   print '</table>'
+
+def _PrintSwatch(color):
+  print '<span class=swatch style="background-color: %s"></span>' % _GetCssRgbColor(color)
+
+def PrintColorTable(color_map):
+  for color in color_map:
+    key = color_map.get(color)
+    print '<h3>Color %s</h3>' % key
+    print '<p>'
+    print str(color)
+    _PrintSwatch(color)
+    print '</p>' 
+    
+    print '<h4>Closest colors:</h4>'
+
+    closest_colors = dmc_colors.GetClosestDMCColorsPairs(color)[:5]
+    print '<table border=1>'
+    print '<tr>'
+    print '<th>Distance</th><th>#</th><th>Name</th><th>Color</th>'
+    print '<tr>'
+    
+    for dmc_color, distance in closest_colors:
+      print '<tr>'
+      print '<td>%s</td>' % distance
+      print '<td>%s</td>' % dmc_color.number
+      print '<td>%s</td>' % dmc_color.name
+      print '<td>'
+      _PrintSwatch(dmc_color.color)
+      print str(dmc_color.color)
+
+      print '</td>'
+      print '</tr>'
+    
+    print '</table>'
+
+
+    
 
 def _GetImage(filename):
   main_dir = os.path.dirname(__file__)
@@ -92,6 +135,7 @@ def main(argv):
 
   cmap = color_map.ColorMap()
   PrintPixelArrayTable(pix_arr, cmap)
+  PrintColorTable(cmap)
 
 if __name__ == '__main__':
   main(sys.argv)
