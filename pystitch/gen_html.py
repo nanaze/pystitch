@@ -85,8 +85,12 @@ def PrintPixelArrayTable(pix_arr, color_map=None):
 def _PrintSwatch(color):
   print '<span class=swatch style="background-color: %s"></span>' % _GetCssRgbColor(color)
 
+
+def _GetColorMapColorsSortedByName(color_map):
+  return sorted(color_map, key=lambda c: color_map.get(c))
+  
 def PrintColorTable(color_map):
-  for color in color_map:
+  for color in _GetColorMapColorsSortedByName(color_map):
     key = color_map.get(color)
     print '<h3>Color %s</h3>' % key
     print '<p>'
@@ -115,9 +119,6 @@ def PrintColorTable(color_map):
       print '</tr>'
     
     print '</table>'
-
-
-    
 
 def _GetImage(filename):
   main_dir = os.path.dirname(__file__)
