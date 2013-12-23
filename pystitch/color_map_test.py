@@ -16,8 +16,8 @@ class ColorMapTest(unittest.TestCase):
     b = color.RGBColor(0,0,1)
     self.assertEquals('B', cmap.get(b))  
 
-    self.assertEquals([((0, 0, 0), 'A'), ((0, 0, 1), 'B')], list(cmap))
-
+    self.assertEquals([(0, 0, 0), (0, 0, 1)], list(cmap))
+    self.assertEquals(['A', 'B'], map(lambda c: cmap.get(c), cmap))
         
 if __name__ == '__main__':
     unittest.main()

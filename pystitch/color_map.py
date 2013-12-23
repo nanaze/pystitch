@@ -13,6 +13,7 @@ class ColorMap(object):
     return self._color_map[color]
 
   def __iter__(self):
-    items = self._color_map.items()
-    for key, val in items:
-      yield key, val
+    keys = sorted(self._color_map.keys())
+
+    for key in keys:
+      yield key
