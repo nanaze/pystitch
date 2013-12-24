@@ -103,7 +103,7 @@ def PrintColorTable(color_map):
     closest_colors = dmc_colors.GetClosestDMCColorsPairs(color)[:5]
     print '<table border=1>'
     print '<tr>'
-    print '<th>Distance</th><th>#</th><th>Name</th><th>Color</th>'
+    print '<th>Distance</th><th>DMC #</th><th>Name</th><th>Color</th>'
     print '<tr>'
     
     for dmc_color, distance in closest_colors:
